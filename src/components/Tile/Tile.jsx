@@ -13,7 +13,7 @@ export const EdgeType = {
   BOTTOM: "BOTTOM",
 }
 
-function Tile({ ownerName='', acquired=false, selected=null, size=90, onEdgeSelect }) {
+function Tile({ ownerName='', acquired=false, acquiredBackground='none', selected=null, size=90, onEdgeSelect, disabled }) {
   const tileRef = useRef();
   const [tileDots, setTileDots] = useState([]);
   const [tileEdges, setTileEdges] = useState([]);
@@ -42,19 +42,27 @@ function Tile({ ownerName='', acquired=false, selected=null, size=90, onEdgeSele
   }, [tileRef]);
   
   return (
-    <div ref={tileRef} className='tile' style={{ width: size }}>
-      { tileDots.map(({x, y}, index) => <Dot x={x} y={y} parentSize={size} key={index} />) }
-      { tileEdges.map((edge, index) => 
+    <div ref={tileRef} className='tile' style={{ width: size, background: acquired ? acquiredBackground : undefined }}>
+      { 
+        tileDots.map(({x, y}, index) => 
+        <Dot key={index} 
+          x={x} y={y} 
+          parentSize={size} 
+        />) 
+      }
+      { 
+        tileEdges.map((edge, index) => 
         <Edge key={index} 
           x={edge.x} y={edge.y} 
           orientation={edge.orientation} 
           parentSize={size}
           selected={selected.has(edge.type)} 
-          onSelect={() => onEdgeSelect(edge)}
-        />)}
-        {
-          acquired && <span>{ownerName}</span>
-        }
+          onSelect={() => !disabled && onEdgeSelect(edge)}
+        />)
+      }
+      {
+        acquired && <span>{ownerName}</span>
+      }
     </div>
   )
 }

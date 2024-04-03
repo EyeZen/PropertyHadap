@@ -15,7 +15,7 @@
     border-radius: 10px;
     background-color: red;
     box-shadow: 0 0 5px black;
-    transition: all 200ms ease-in-out;
+    transition: all 100ms ease-in-out;
     
     &:hover {
         transform: scale(1.5);
@@ -33,7 +33,7 @@
     opacity: 0.1;
     border-radius: 10px;
     transform: scale(0.9);
-    transition: all 200ms ease-in-out;
+    transition: all 100ms ease-in-out;
 
     &:hover {
         /* transform: scale(1.5); */
