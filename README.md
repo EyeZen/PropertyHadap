@@ -14,3 +14,13 @@
 //     alias: "",
 //   }
 // ];
+
+#TODO - 
+record history of moves
+moves rewind and match player
+save moves and state
+save and reload game
+send feedback
+enter player, join game, login, signup
+pick & move components
+admin-mode 

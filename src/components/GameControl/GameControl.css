@@ -19,22 +19,30 @@
         justify-content: center;
         align-items: center;
 
-        cursor: pointer;
+        &:not(.disabled) {
+            cursor: pointer;
 
-        &:hover {
-            background-color: #fefefe;
-            color: #3e3e3e;
+            &:hover {
+                background-color: #fefefe;
+                color: #3e3e3e;
+            }
+    
+            &:active {
+                background-color: #3e3e3e;
+                color: #fefefe;
+                outline: 5px solid #fefefe;
+            }
         }
-
-        &:active {
-            background-color: #3e3e3e;
+        &.disabled {
             color: #fefefe;
-            outline: 5px solid #fefefe;
+            background-color: #5e5e5e;
         }
+
     }
 
-    & .danger:hover {
-        background-color: rgb(255, 36, 36);
-        color: #fefefe;
+
+    & > .danger:hover {
+        background-color: rgb(255, 36, 36) !important;
+        color: #fefefe !important;
     }
 }

@@ -4,9 +4,10 @@ import GameControl from "./components/GameControl/GameControl";
 import GameLayout from "./components/GameLayout/GameLayout";
 import GameStatus from "./components/GameStatus/GameStatus";
 import { gameBoardActions } from './store/slices/gameBoardSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
+    const gameOver = useSelector(state => state.gameboard.gameOver);
     const { setPlayers, setBoardSize, generateTilemap } = gameBoardActions;
     const dispatch = useDispatch();
 
@@ -27,6 +28,7 @@ function App() {
             label: "Start",
             icon: "fa-solid fa-play",
             action: initialize,
+            disabled: false,
         },
         // {
         //     label: "Save",

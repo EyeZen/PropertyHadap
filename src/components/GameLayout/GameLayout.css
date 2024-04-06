@@ -1,5 +1,5 @@
 .layout-default {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     background-color: #3e3e3e;
     width: 100%;
     height: 100vh;
@@ -41,6 +41,10 @@
         & > .layout-board-container {
             width: 500px;
             aspect-ratio: 1;
+
+            @media screen and (max-width: 700px) {
+                width: 350px;
+            }
         }
     }
 }
