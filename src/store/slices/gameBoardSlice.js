@@ -137,5 +137,3 @@ const gameBoard = createSlice({
 
 export const gameBoardActions = gameBoard.actions;
 export const gameBoardReducers = gameBoard.reducer;
-
-// export default { gameBoardActions, gameBoardReducers };
