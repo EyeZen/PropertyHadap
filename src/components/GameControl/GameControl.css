@@ -1,0 +1,39 @@
+.game-controls {
+    border: 1px solid #fefefe;
+    /* width: fit-content; */
+    display: grid;
+    gap: 1em;
+    padding: 1em;
+
+    & > .game-control {
+        flex: 1;
+        border: 1px solid #fefefe;
+        padding: 0.5em;
+        text-align: center;
+        user-select: none;
+        transition: all 200ms ease-in-out;
+
+        display: flex;
+        gap: 1em;
+        justify-content: center;
+        align-items: center;
+
+        cursor: pointer;
+
+        &:hover {
+            background-color: #fefefe;
+            color: #3e3e3e;
+        }
+
+        &:active {
+            background-color: #3e3e3e;
+            color: #fefefe;
+            outline: 5px solid #fefefe;
+        }
+    }
+
+    & .danger:hover {
+        background-color: rgb(255, 36, 36);
+        color: #fefefe;
+    }
+}

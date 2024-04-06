@@ -1,5 +1,6 @@
 .game-board {
     margin: 10px;
+    user-select: none;
 }
 
 .board-row {
