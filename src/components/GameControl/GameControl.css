@@ -1,5 +1,6 @@
 .game-controls {
     border: 1px solid #fefefe;
+    height: 100%;
     /* width: fit-content; */
     display: grid;
     gap: 1em;

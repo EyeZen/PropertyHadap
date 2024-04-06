@@ -1,6 +1,7 @@
 import "./App.css";
 import GameBoard from './components/GameBoard/GameBoard'
 import GameControl from "./components/GameControl/GameControl";
+import GameLayout from "./components/GameLayout/GameLayout";
 import GameStatus from "./components/GameStatus/GameStatus";
 import { gameBoardActions } from './store/slices/gameBoardSlice';
 import { useDispatch } from 'react-redux';
@@ -41,12 +42,13 @@ function App() {
 
     return (
         <div className="container">
-            {/* <button onClick={initialize}>Start</button> */}
-            <div className="game-container">
+            <GameLayout>
                 <GameStatus />
                 <GameBoard />
-            </div>
-            <GameControl controls={controls} />
+                <GameControl controls={controls} /> 
+            </GameLayout>
+            {/* <div className="game-container">
+            </div>*/}
         </div>
     )
 }

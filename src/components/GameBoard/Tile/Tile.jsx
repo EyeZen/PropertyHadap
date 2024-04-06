@@ -1,10 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
 import "./Tile.css";
-
-const Orientation = {
-  HORIZONTAL: "HORIZONTAL",
-  VERTICAL: "VERTICAL"
-};
+import React, { useEffect, useRef, useState } from 'react'
+import Orientation from "../../../../helpers/Orientation";
 
 export const EdgeType = {
   LEFT: "LEFT",

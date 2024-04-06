@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import "./GameStatus.css";
 import helpers from "../../../helpers";
+import GameComponentType, { GameComponentTypeSymbol } from "../../../helpers/GameComponentType";
 
 function GameStatus() {
     const tilemap = useSelector(state => state.gameboard.tilemap);
@@ -54,5 +55,7 @@ function GameStatus() {
         </div>
     )
 }
+
+GameStatus[GameComponentTypeSymbol] = GameComponentType.STATUS;
 
 export default GameStatus

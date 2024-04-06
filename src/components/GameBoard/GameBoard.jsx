@@ -2,6 +2,7 @@ import "./GameBoard.css";
 import Tile from './Tile/Tile.jsx';
 import { useDispatch, useSelector } from "react-redux";
 import { gameBoardActions } from "../../store/slices/gameBoardSlice.js";
+import GameComponentType, { GameComponentTypeSymbol } from "../../../helpers/GameComponentType.js";
 
 function GameBoard() {
   const tilemap = useSelector(state => state.gameboard.tilemap);
@@ -27,5 +28,7 @@ function GameBoard() {
     </div>
   )
 }
+
+GameBoard[GameComponentTypeSymbol] = GameComponentType.BOARD;
 
 export default GameBoard

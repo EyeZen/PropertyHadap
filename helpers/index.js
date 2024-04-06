@@ -1,3 +1,4 @@
+import { GameComponentTypeSymbol } from "./GameComponentType";
 
 const helpers = {};
 
@@ -46,5 +47,9 @@ helpers.checkTileAcquired = (tile) => {
 helpers.getPlayerScore = (tilemap, player) => {
   return tilemap.flatMap(row => row).filter(tile => tile.acquired && tile.acquiredBy && tile.acquiredBy.alias === player.alias).length;
 } 
+
+helpers.isGameComponentOfType = (element, componentType) => {
+  return element.type && element.type[GameComponentTypeSymbol] && element.type[GameComponentTypeSymbol] === componentType;
+}
 
 export default helpers;
