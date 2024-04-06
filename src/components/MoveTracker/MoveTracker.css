@@ -56,7 +56,7 @@
         }
 
         &.move__highlighted .move__turn {
-            background-color: #0f5400 !important;
+            background-color: rgb(9, 176, 9);
         }
 
         & .move__turn {

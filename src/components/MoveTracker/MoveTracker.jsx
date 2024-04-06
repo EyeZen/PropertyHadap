@@ -25,7 +25,7 @@ function MoveTracker() {
                 <ul className="moves-list">
                     {
                         moves.map((move, moveIndex) => 
-                            <li key={moveIndex} className={`move ${move.acquired ? 'move__highlited' : ''}`}>
+                            <li key={moveIndex} className={`move ${move.acquired ? 'move__highlighted' : ''}`}>
                                 <span className="move__turn">{players[move.turn].alias}</span>
                                 <span className="move__tile">{`Tile[${move.tile.row}][${move.tile.col}]`}</span>
                                 <span className="move__edge">{`${helpers.capitalize(move.edge)}-edge`}</span>
