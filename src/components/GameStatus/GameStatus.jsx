@@ -10,7 +10,7 @@ function GameStatus() {
     const gameOver = useSelector(state => state.gameboard.gameOver);
 
     const scoreOf = helpers.getPlayerScore.bind(null, tilemap);
-    const isWinner = (player) => gameOver && players.map(player => ({...player, score: scoreOf(player)})).reduce((playerPrev, playerCurr) => playerPrev.score > playerCurr ? playerPrev : playerCurr).alias === player.alias;
+    const isWinner = (player) => gameOver && players.map(_player => ({..._player, score: scoreOf(_player)})).reduce((playerPrev, playerCurr) => playerPrev.score > playerCurr ? playerPrev : playerCurr).alias === player.alias;
 
     return (
         <div className="game-status">

@@ -52,4 +52,35 @@ helpers.isGameComponentOfType = (element, componentType) => {
   return element.type && element.type[GameComponentTypeSymbol] && element.type[GameComponentTypeSymbol] === componentType;
 }
 
+helpers.capitalize = str => `${str.slice(0,1).toUpperCase()}${str.slice(1).toLowerCase()}`;
+
+helpers.makeDraggable = (element) => {
+  element.addEventListener('mousedown', (ev) => {
+    let shiftX = ev.clientX - element.getBoundingClientRect().left;
+    let shiftY = ev.clientY - element.getBoundingClientRect().top;
+
+    element.style.position = 'absolute';
+    element.style.zIndex = 1000;
+    document.body.append(element);
+
+    moveAt(ev.pageX, ev.pageY);
+
+    function moveAt(pageX, pageY) {
+      element.style.left = pageX - shiftX + 'px';
+      element.style.top = pageY - shiftY + 'px';
+    }
+
+    function onMouseMove(event) {
+      moveAt(event.pageX, event.pageY);
+    }
+
+    document.addEventListener('mousemove', onMouseMove);
+
+    element.addEventListener('mouseup', function() {
+      document.removeEventListener('mousemove', onMouseMove);
+      element.onmouseup = null;
+    });
+  });
+}
+
 export default helpers;

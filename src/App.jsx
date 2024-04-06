@@ -3,12 +3,13 @@ import GameBoard from './components/GameBoard/GameBoard'
 import GameControl from "./components/GameControl/GameControl";
 import GameLayout from "./components/GameLayout/GameLayout";
 import GameStatus from "./components/GameStatus/GameStatus";
+import MoveTracker from "./components/MoveTracker/MoveTracker";
 import { gameBoardActions } from './store/slices/gameBoardSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
     const gameOver = useSelector(state => state.gameboard.gameOver);
-    const { setPlayers, setBoardSize, generateTilemap } = gameBoardActions;
+    const { setPlayers, setBoardSize, generateTilemap, resetGameBoard } = gameBoardActions;
     const dispatch = useDispatch();
 
     const initialize = () => {
@@ -37,13 +38,21 @@ function App() {
         // },
         {
             icon: "fa-solid fa-power-off",
-            label: "Abandon",
-            danger: true
+            label: gameOver ? "Reset" : "Abandon",
+            danger: true,
+            action: () => {
+                if(gameOver) {
+                    dispatch(resetGameBoard());
+                } else {
+                    dispatch(resetGameBoard());
+                }
+            }
         }
     ];
 
     return (
         <div className="container">
+            <MoveTracker />
             <GameLayout>
                 <GameStatus />
                 <GameBoard />

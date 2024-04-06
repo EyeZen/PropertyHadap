@@ -7,15 +7,17 @@ const defaultState = {
     tilemap: [],
     turn: 0,
     gameOver: false,
-    players: []
+    players: [],
+    moves: []
 };
 
 const processTileSelectedEdge = (tile, selectedEdgeType, currentPlayer) => {
-    if(!tile.selected.some(edgeType => edgeType === selectedEdgeType))
+    if(!tile.selected.some(edgeType => edgeType === selectedEdgeType)) {
         tile.selected.push(selectedEdgeType);
-    if(tile.selected.length === 4) {
-        tile.acquired = true;
-        tile.acquiredBy = currentPlayer;
+        if(tile.selected.length === 4) {
+            tile.acquired = true;
+            tile.acquiredBy = currentPlayer;
+        }
     }
     return tile;
 };
@@ -95,40 +97,70 @@ const gameBoard = createSlice({
             if(acquiredPreProcess) return state;
 
             state.tilemap[tilePosition.row][tilePosition.col] = processTileSelectedEdge(tile, selectedEdge, state.players[state.turn]);
+
             const acquiredPostProcess = state.tilemap[tilePosition.row][tilePosition.col].acquired;
-            // update turn
-            if(!acquiredPostProcess) {
-                state.turn = (state.turn + 1) % state.players.length;
-            }
+            const move = { turn: state.turn, tile: tilePosition, edge: selectedEdge, acquired: acquiredPostProcess };
 
             // update neighbour-tile's common edge
             switch(selectedEdge) {
                 case EdgeType.LEFT:
                     if(tile.neighbors.left) {
                         const position = tile.neighbors.left;
+                        const acquired_before = state.tilemap[position.row][position.col].acquired;
                         state.tilemap[position.row][position.col] = processTileSelectedEdge(state.tilemap[position.row][position.col], EdgeType.RIGHT, state.players[state.turn]);
+                        const acquired_after = state.tilemap[position.row][position.col].acquired;
+                        if(!move.acquired && !acquired_before && acquired_after) {
+                            move.acquired = true;
+                            move.tile = position;
+                            move.edge = EdgeType.RIGHT;
+                        }
                     } 
                     break;
                 case EdgeType.TOP:
                     if(tile.neighbors.top) {
                         const position = tile.neighbors.top;
+                        const acquired_before = state.tilemap[position.row][position.col].acquired;
                         state.tilemap[position.row][position.col] = processTileSelectedEdge(state.tilemap[position.row][position.col], EdgeType.BOTTOM, state.players[state.turn]);
+                        const acquired_after = state.tilemap[position.row][position.col].acquired;
+                        if(!move.acquired && !acquired_before && acquired_after) {
+                            move.acquired = true;
+                            move.tile = position;
+                            move.edge = EdgeType.BOTTOM;
+                        }
                     }
                     break;
                 case EdgeType.RIGHT:
                     if(tile.neighbors.right) {
                         const position = tile.neighbors.right;
+                        const acquired_before = state.tilemap[position.row][position.col].acquired;
                         state.tilemap[position.row][position.col] = processTileSelectedEdge(state.tilemap[position.row][position.col], EdgeType.LEFT, state.players[state.turn]);
+                        const acquired_after = state.tilemap[position.row][position.col].acquired;
+                        if(!move.acquired && !acquired_before && acquired_after) {
+                            move.acquired = true;
+                            move.tile = position;
+                            move.edge = EdgeType.LEFT;
+                        }
                     }
                     break;
                 case EdgeType.BOTTOM:
                     if(tile.neighbors.bottom) {
                         const position = tile.neighbors.bottom;
+                        const acquired_before = state.tilemap[position.row][position.col].acquired;
                         state.tilemap[position.row][position.col] = processTileSelectedEdge(state.tilemap[position.row][position.col], EdgeType.TOP, state.players[state.turn]);
+                        const acquired_after = state.tilemap[position.row][position.col].acquired;
+                        if(!move.acquired && !acquired_before && acquired_after) {
+                            move.acquired = true;
+                            move.tile = position;
+                            move.edge = EdgeType.TOP;
+                        }
                     }
                     break;
             }
 
+            state.moves.push(move);
+            if(!move.acquired) {
+                state.turn = (state.turn + 1) % state.players.length;
+            }
             state.gameOver = checkGameOver(state.tilemap);
         },
     }
