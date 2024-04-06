@@ -10,7 +10,16 @@
         "control control control"
     ;
     grid-template-rows: 80% 20%;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 30% 70%;
+
+    @media screen and (max-width: 1000px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "status"
+            "board"
+            "control";
+    }
 
     & > .layout-status-wrapper,
     & > .layout-control-wrapper,

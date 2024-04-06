@@ -9,6 +9,13 @@ export const EdgeType = {
   BOTTOM: "BOTTOM",
 }
 
+export const DotType = {
+  TOP_LEFT: "TOP_LEFT",
+  TOP_RIGHT: "TOP_RIGHT",
+  BOTTOM_RIGHT: "BOTTOM_RIGHT",
+  BOTTOM_LEFT: "BOTTOM_LEFT",
+}
+
 function Tile({ ownerName='', acquired=false, acquiredBackground='none', selected=null, size=90, onEdgeSelect, disabled }) {
   const tileRef = useRef();
   const [tileDots, setTileDots] = useState([]);
@@ -18,17 +25,17 @@ function Tile({ ownerName='', acquired=false, acquiredBackground='none', selecte
     const tile = tileRef.current;
     const { width, height } = tile.getBoundingClientRect();
     setTileDots([
-      { x: 0,  y: 0 },
-      { x: width, y: 0 },
-      { x: width, y: height },
-      { x: 0, y: height },
+      DotType.TOP_LEFT,
+      DotType.TOP_RIGHT,
+      DotType.BOTTOM_RIGHT,
+      DotType.BOTTOM_LEFT,
     ]);
 
     setTileEdges([
-      { type: EdgeType.LEFT,   x: 0,     y: 0,      orientation: Orientation.VERTICAL   },
-      { type: EdgeType.TOP,    x: 0,     y: 0,      orientation: Orientation.HORIZONTAL },
-      { type: EdgeType.RIGHT,  x: width, y: 0,      orientation: Orientation.VERTICAL   },
-      { type: EdgeType.BOTTOM, x: 0,     y: height, orientation: Orientation.HORIZONTAL },
+      EdgeType.LEFT,
+      EdgeType.TOP,
+      EdgeType.RIGHT,
+      EdgeType.BOTTOM,
     ]);
 
     return () => {
@@ -40,18 +47,14 @@ function Tile({ ownerName='', acquired=false, acquiredBackground='none', selecte
   return (
     <div ref={tileRef} className='tile' style={{ background: acquired ? acquiredBackground : undefined }}>
       { 
-        tileDots.map(({x, y}, index) => 
-        <Dot key={index} 
-          x={x} y={y} 
-          parentSize={size} 
-        />) 
+        tileDots.map((dotType, index) => <Dot key={index} type={dotType} />) 
       }
       { 
-        tileEdges.map((edge, index) => 
+        tileEdges.map((edgeType, index) => 
         <Edge key={index} 
-          type={edge.type}
-          selected={selected.some(edgeType => edgeType === edge.type)} 
-          onSelect={() => !disabled && onEdgeSelect(edge)}
+          type={edgeType}
+          selected={selected.some(selectedEdgeType => selectedEdgeType === edgeType)} 
+          onSelect={() => !disabled && onEdgeSelect(edgeType)}
         />)
       }
       {
@@ -61,13 +64,14 @@ function Tile({ ownerName='', acquired=false, acquiredBackground='none', selecte
   )
 }
 
-function Dot({ x, y, parentSize }) {
-  const size = parentSize * 0.1;
-  return <div className='tile_dot' style={{ 
-    width: size, 
-    left: x - size/2, 
-    top: y - size/2
-  }}></div>
+function Dot({ type }) {
+  return <div className={`tile_dot ${
+    type === DotType.TOP_LEFT ? 'tile_dot__top-left' 
+    : type === DotType.TOP_RIGHT ? 'tile_dot__top-right'
+    : type === DotType.BOTTOM_RIGHT ? 'tile_dot__bottom-right'
+    : type === DotType.BOTTOM_LEFT ? 'tile_dot__bottom-left'
+    : ''
+  }`} ></div>
 }
 
 function Edge({type, selected, onSelect}) {

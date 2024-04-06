@@ -88,13 +88,13 @@ const gameBoard = createSlice({
         selectEdge(state, { payload }) {
             const { tilePosition, selectedEdge } = payload;
             const tile = state.tilemap[tilePosition.row][tilePosition.col];
-            const isEdgeSelected = tile.selected.some(edge => edge === selectedEdge.type);
+            const isEdgeSelected = tile.selected.some(edge => edge === selectedEdge);
             if(isEdgeSelected) return state;
 
             const acquiredPreProcess = tile.acquired;
             if(acquiredPreProcess) return state;
 
-            state.tilemap[tilePosition.row][tilePosition.col] = processTileSelectedEdge(tile, selectedEdge.type, state.players[state.turn]);
+            state.tilemap[tilePosition.row][tilePosition.col] = processTileSelectedEdge(tile, selectedEdge, state.players[state.turn]);
             const acquiredPostProcess = state.tilemap[tilePosition.row][tilePosition.col].acquired;
             // update turn
             if(!acquiredPostProcess) {
@@ -102,7 +102,7 @@ const gameBoard = createSlice({
             }
 
             // update neighbour-tile's common edge
-            switch(selectedEdge.type) {
+            switch(selectedEdge) {
                 case EdgeType.LEFT:
                     if(tile.neighbors.left) {
                         const position = tile.neighbors.left;
