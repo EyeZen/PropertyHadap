@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import "./App.css";
 import GameBoard from './components/GameBoard/GameBoard'
+import GameStatus from "./components/GameStatus/GameStatus";
 import { gameBoardActions } from './store/slices/gameBoardSlice';
 import { useDispatch } from 'react-redux';
-import helpers from '../helpers';
 
 function App() {
     const { setPlayers, setBoardSize, generateTilemap } = gameBoardActions;
@@ -18,13 +18,15 @@ function App() {
         
         dispatch(setBoardSize({ rows: 3, columns: 3 }));
         dispatch(generateTilemap());
-        // dispatch(setTilemap({ tilemap: helpers.generateTilemap(3, 3)}));
     }
 
     return (
         <div className="container">
-            <div><button onClick={initialize}>Initialize</button></div>
-            <GameBoard rows={3} columns={3} />
+            <button onClick={initialize}>Start</button>
+            <div className="game-container">
+                <GameStatus />
+                <GameBoard />
+            </div>
         </div>
     )
 }

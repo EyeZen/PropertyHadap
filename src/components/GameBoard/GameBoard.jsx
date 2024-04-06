@@ -1,5 +1,5 @@
 import "./GameBoard.css";
-import Tile from '../Tile/Tile.jsx';
+import Tile from './Tile/Tile.jsx';
 import { useDispatch, useSelector } from "react-redux";
 import { gameBoardActions } from "../../store/slices/gameBoardSlice.js";
 

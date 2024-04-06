@@ -43,4 +43,8 @@ helpers.checkTileAcquired = (tile) => {
     );
 }
 
+helpers.getPlayerScore = (tilemap, player) => {
+  return tilemap.flatMap(row => row).filter(tile => tile.acquired && tile.acquiredBy && tile.acquiredBy.alias === player.alias).length;
+} 
+
 export default helpers;

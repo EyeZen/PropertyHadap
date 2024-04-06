@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import helpers from "../../../helpers";
-import { EdgeType } from "../../components/Tile/Tile";
+import { EdgeType } from "../../components/GameBoard/Tile/Tile";
 
 const defaultState = {
     rows: 0,
