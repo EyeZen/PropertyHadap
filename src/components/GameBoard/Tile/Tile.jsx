@@ -38,7 +38,7 @@ function Tile({ ownerName='', acquired=false, acquiredBackground='none', selecte
   }, [tileRef]);
   
   return (
-    <div ref={tileRef} className='tile' style={{ width: size, background: acquired ? acquiredBackground : undefined }}>
+    <div ref={tileRef} className='tile' style={{ background: acquired ? acquiredBackground : undefined }}>
       { 
         tileDots.map(({x, y}, index) => 
         <Dot key={index} 
@@ -49,9 +49,7 @@ function Tile({ ownerName='', acquired=false, acquiredBackground='none', selecte
       { 
         tileEdges.map((edge, index) => 
         <Edge key={index} 
-          x={edge.x} y={edge.y} 
-          orientation={edge.orientation} 
-          parentSize={size}
+          type={edge.type}
           selected={selected.some(edgeType => edgeType === edge.type)} 
           onSelect={() => !disabled && onEdgeSelect(edge)}
         />)
@@ -72,48 +70,17 @@ function Dot({ x, y, parentSize }) {
   }}></div>
 }
 
-function Edge({x, y, orientation, parentSize, selected, onSelect}) {
-  const [styles, setStyles] = useState({
-    left: 0,
-    top: 0,
-    width: 0,
-    height: 0,
-  });
-
-  useEffect(() => {
-    const dim = parentSize * 0.05;
-    switch(orientation) {
-      case Orientation.HORIZONTAL:
-        
-        setStyles({
-          width: parentSize,
-          height: dim,
-          left: x,
-          top: y - dim / 2,
-        });
-        break;
-      case Orientation.VERTICAL:
-        setStyles({
-          width: dim,
-          height: parentSize,
-          left: x - dim / 2,
-          top: y,
-        });
-        break;
-    }
-
-    return () => setStyles({
-      left: 0,
-      top: 0,
-      width: 10,
-      height: 10,
-    });
-  }, [x, y, orientation, parentSize]);
+function Edge({type, selected, onSelect}) {
 
   return (
     <div 
-      className={`tile_edge ${!selected ? '' : 'tile_edge__selected'}`} 
-      style={styles} 
+      className={`tile_edge ${!selected ? '' : 'tile_edge__selected'} ${
+        type === EdgeType.TOP ? 'tile_edge__top'
+        : type === EdgeType.RIGHT ? 'tile_edge__right'
+        : type === EdgeType.BOTTOM ? 'tile_edge__bottom'
+        : type === EdgeType.LEFT ? 'tile_edge__left'
+        : ''
+      }`} 
       onClick={onSelect}
     ></div>
   );

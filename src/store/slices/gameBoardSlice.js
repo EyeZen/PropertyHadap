@@ -3,8 +3,7 @@ import helpers from "../../../helpers";
 import { EdgeType } from "../../components/GameBoard/Tile/Tile";
 
 const defaultState = {
-    rows: 0,
-    columns: 0,
+    size: { rows: 0, columns: 0 },
     tilemap: [],
     turn: 0,
     gameOver: false,
@@ -47,8 +46,8 @@ const gameBoard = createSlice({
         // rows, columns
         setBoardSize(state, { payload }) {
             const { rows, columns } = payload;
-            state.rows = rows;
-            state.columns = columns;
+            state.size.rows = rows;
+            state.size.columns = columns;
         },
         // tilemap
         setTilemap(state, { payload }) {
@@ -76,7 +75,7 @@ const gameBoard = createSlice({
 
         // actions
         generateTilemap(state, { payload }) {
-            state.tilemap = helpers.generateTilemap(state.rows, state.columns);
+            state.tilemap = helpers.generateTilemap(state.size.rows, state.size.columns);
         },
         addPlayer(state, { payload }) {
             const { player } = payload;

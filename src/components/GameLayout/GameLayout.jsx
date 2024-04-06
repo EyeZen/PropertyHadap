@@ -19,7 +19,9 @@ function GameLayout({ children }) {
                 {children.filter(child => helpers.isGameComponentOfType(child, GameComponentType.CONTROL))}
             </div>
             <div className="layout-board-wrapper">
-                {children.filter(child => helpers.isGameComponentOfType(child, GameComponentType.BOARD))}
+                <div className="layout-board-container">
+                    {children.filter(child => helpers.isGameComponentOfType(child, GameComponentType.BOARD))}
+                </div>
             </div>
         </div>
     )

@@ -1,10 +1,11 @@
 .game-board {
     margin: 10px;
     user-select: none;
+
+    display: grid;
 }
 
 .board-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    place-items: center;
 }

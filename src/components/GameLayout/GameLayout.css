@@ -26,5 +26,12 @@
     }
     & > .layout-board-wrapper {
         grid-area: board;
+        display: grid;
+        place-content: center;
+
+        & > .layout-board-container {
+            width: 500px;
+            aspect-ratio: 1;
+        }
     }
 }
