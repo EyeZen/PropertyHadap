@@ -56,7 +56,7 @@ function Tile({ ownerName='', acquired=false, acquiredBackground='none', selecte
           x={edge.x} y={edge.y} 
           orientation={edge.orientation} 
           parentSize={size}
-          selected={selected.has(edge.type)} 
+          selected={selected.some(edgeType => edgeType === edge.type)} 
           onSelect={() => !disabled && onEdgeSelect(edge)}
         />)
       }
