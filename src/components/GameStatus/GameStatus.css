@@ -1,0 +1,75 @@
+.game-status {
+    border: 1px solid #fefefe;
+    width: fit-content;
+    padding: 1em;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    & > h1 {
+        font-size: 1.5rem;
+    }
+
+    & .game-turn {
+        border: 1px solid #fefefe;
+        padding: 1rem;
+
+        & > h2 {
+            font-size: 1.2rem;
+            /* text-transform: uppercase; */
+        }
+        
+        .turn-player {
+            display: flex;
+            align-items: center;
+
+            & > h3 {
+                font-weight: normal;
+            }
+        }
+    }
+
+    & .game-scoreboard {
+        border: 1px solid #fefefe;
+        padding: 1em;
+
+        & > h1 {
+            margin-bottom: 1rem;    
+        }
+
+        & > ul {
+            list-style: none;
+            
+            & > li {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+
+                & :last-child {
+                    text-align: center;
+                }
+            }
+
+            & > .player-winner {
+                color: #33ed338e;
+            }
+
+            & > .player-turn {
+                color: rgba(49, 49, 246, 0.843);
+            }
+        }
+    }
+
+}
+
+
+.game-result-container {
+    padding: 1rem;
+    border: 1px solid rgb(16, 228, 16);
+    background-color: #33ed338e;
+
+    & > .game-result {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

@@ -1,0 +1,6 @@
+.game-container {
+    display: grid;
+    place-content: center;
+
+    grid-template-columns: repeat(2, 1fr);
+}
