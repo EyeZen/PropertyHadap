@@ -83,4 +83,6 @@ helpers.makeDraggable = (element) => {
   });
 }
 
+helpers.isReactComponent = (element) => element.$$typeof && element.$$typeof === Symbol.for("react.element");
+
 export default helpers;

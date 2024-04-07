@@ -1,4 +1,6 @@
 import "./App.css";
+import AddPlayerDialog from "./components/Dialog/AddPlayerDialog/AddPlayerDialog";
+import Dialog from "./components/Dialog/Dialog";
 import GameBoard from './components/GameBoard/GameBoard'
 import GameControl from "./components/GameControl/GameControl";
 import GameLayout from "./components/GameLayout/GameLayout";
@@ -52,14 +54,14 @@ function App() {
 
     return (
         <div className="container">
-            <MoveTracker />
+            <Dialog>
+                <AddPlayerDialog />
+            </Dialog>
             <GameLayout>
                 <GameStatus />
                 <GameBoard />
                 <GameControl controls={controls} /> 
             </GameLayout>
-            {/* <div className="game-container">
-            </div>*/}
         </div>
     )
 }

@@ -1,0 +1,70 @@
+
+/* add player dialog */
+.add-player-dialog {
+    width: 100%;
+    height: 100%;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    & header,
+    & main {
+        border: 1px solid #fefefe;
+        padding: 1em;
+    }
+
+    & header {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    & main {
+        flex: 1;
+        
+        & .add-player__controller {
+            display: grid;
+            grid-template-columns: 1fr;
+            row-gap: 1em;
+
+            & input {
+                width: 100%;
+                font-size: 1em;
+                background: none;
+                border: 1px solid #fefefe;
+                padding: 0.5em;
+                caret-color: #fefefe;
+                color: #fefefe;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+
+    & footer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1em;
+
+        & button {
+            background: none;
+            border: none;
+            color: #fefefe;
+            border: 1px solid #fefefe;
+            padding: 0.5em;
+            font-weight: bold;
+            cursor: pointer;
+
+            &:hover {
+                &:first-child {
+                    background-color: #40dc40;
+                }
+                &:last-child {
+                    background-color: #f7401f;
+                }
+            }
+        }
+    }
+}
