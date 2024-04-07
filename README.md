@@ -24,3 +24,7 @@ send feedback
 enter player, join game, login, signup
 pick & move components
 admin-mode 
+
+#TODO -
+make MoveTracker resizable
+make other components resizable and draggable, droppable

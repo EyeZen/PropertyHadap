@@ -14,10 +14,6 @@ function MoveTracker() {
         }
     }, [moveTrackerRef]);
 
-    useEffect(() => {
-        console.log(moves);
-    }, [moves]);
-
     return (
         <div className="moves-tracker" ref={moveTrackerRef}>
             <h1>Move Tracker</h1>
