@@ -11,3 +11,30 @@ This is a simple hobby project, a game made with React.
 - When all tiles are captured, player with the most tiles captured is the winner!
 
 <img src="./assets/property_hadap.png">
+
+# Installation / Setup
+- Clone repo
+```bash
+git clone https://github.com/EyeZen/PropertyHadap.git
+```
+
+- Install dependencies
+```bash
+npm install
+```
+
+- Start development server
+```bash
+npm run dev
+```
+
+- Done 👍
+
+
+# Future Plans
+<p>A list of things that I want to incorporate into this project!</p>
+<ul>
+    <li>Clean UI</li>
+    <li>Add support for multiple-device multiplayer system</li>
+    <li>Maybe convert it into a micro-frontend</li>
+</ul> 
