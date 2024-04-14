@@ -17,10 +17,12 @@ function Dialog({ children, open }) {
 
     return (
         <div className="dialog-wrapper" style={{ display: open ? undefined : 'none' }}>
+            <div className="dialog-inner-wrapper">
                 <div className="dialog-container">
                     {children}
                 </div>
             </div>
+        </div>
     )
 }
 

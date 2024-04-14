@@ -3,6 +3,22 @@
     display: grid;
     place-content: center;
 
+    & .btn-group {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1em;
+
+        /* border: 8px solid #fefefe; */
+        padding: 5em 7em;
+        background-color: #7c7b7bc1;
+        box-shadow: -2px -2px 0px #ffffff, 2px 2px 0px white;
+        transition: all 200ms ease-in-out;
+        
+        &:hover {
+            box-shadow: -5px -5px 0px #ffffff, 5px 5px 0px white;
+        }
+    }
+
     & button {
         background: none;
         color: #fefefe;
@@ -148,5 +164,33 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1em;
+    }
+}
+
+.guide-wrapper {
+    padding: 1em;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    height: 100%;
+
+    & h1 {
+        border: 1px solid #fefefe;  
+        padding-block: 0.5em;
+        position: sticky;
+        top: 0;
+        background-color: #434343;
+    }
+
+    & ul {
+        flex: 1;
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1em;
+        border: 1px solid #fefefe;
+        overflow-y: scroll;
+        padding: 1em;
     }
 }

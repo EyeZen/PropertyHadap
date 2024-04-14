@@ -2,26 +2,21 @@ import { useState } from "react";
 import "./CreateGame.css";
 import { useDispatch } from "react-redux";
 import { gameBoardActions } from "../../store/slices/gameBoardSlice";
+import Dialog from "../Dialog/Dialog";
 
 function CreateGame() {
     const [createGameFlag, setCreateGameFlag] = useState(false);
+    const [showGuideFlag, setShowGuideFlag] = useState(false);
     const [playersList, setPlayersList] = useState([]);
-    const [size, setSize] = useState({ rows: 0, columns: 0 });
+    const [size, setSize] = useState(3);
     const [newPlayer, setNewPlayer] = useState('');
     const dispatch = useDispatch();
     const { setBoardSize, setPlayers, setGameStarted } = gameBoardActions;
 
-    const rowsChangeHandler = (ev) => {
+    const sizeChangeHandler = (ev) => {
         const value = ev.target.value;
         // if(value && !isNaN(parseInt(value))) {
-            setSize(_size => ({ ..._size, rows: value }))
-        // }
-    };
-    
-    const columnsChangeHandler = (ev) => {
-        const value = ev.target.value;
-        // if(value && !isNaN(parseInt(value))) {
-            setSize(_size => ({ ..._size, columns: value }))
+            setSize(value);
         // }
     };
 
@@ -42,11 +37,10 @@ function CreateGame() {
 
     const createGameHandler = () => {
         if(
-            size.rows && !isNaN(parseInt(size.rows)) &&
-            size.columns && !isNaN(parseInt(size.columns)) &&
+            size && !isNaN(parseInt(size)) &&
             playersList && playersList.length > 0         
         ) {
-            dispatch(setBoardSize(size));
+            dispatch(setBoardSize({ rows: size, columns: size }));
             dispatch(setPlayers({ players: playersList.map(player => ({ alias: player })) }));
             dispatch(setGameStarted(true));
         }
@@ -54,18 +48,17 @@ function CreateGame() {
 
     return (
         <div className="create-game">
-            <button onClick={() => setCreateGameFlag(flag => !flag)}>Create Game</button>
+            <div className="btn-group">
+                <button onClick={() => setCreateGameFlag(flag => !flag)}>Create Game</button>
+                <button onClick={() => setShowGuideFlag(true)}>Guide</button>
+            </div>
 
             <div className="game-form-wrapper" style={{ display: createGameFlag ? undefined : 'none' }}>
                 <h1>New Game</h1>
                 <div className="game-form">
                     <div className="form-controller">
-                        <label htmlFor="rows">Rows</label>
-                        <input type="text" name="rows" id="rows" value={size.rows} onChange={rowsChangeHandler} />
-                    </div>
-                    <div className="form-controller">
-                        <label htmlFor="columns">Columns</label>
-                        <input type="text" name="columns" id="columns" value={size.columns} onChange={columnsChangeHandler}  />
+                        <label htmlFor="size">Board Size</label>
+                        <input type="text" name="size" id="size" value={size} onChange={sizeChangeHandler} />
                     </div>
                     <div className="form-controller form-controller__block">
                         <div className="form-controller__header">
@@ -87,6 +80,29 @@ function CreateGame() {
                     <button onClick={() => setCreateGameFlag(false)}>Cancel</button>
                 </div>
             </div>
+
+            <Dialog open={showGuideFlag} >
+                <GameGuide onClose={() => setShowGuideFlag(false)} />
+            </Dialog>
+            
+        </div>
+    )
+}
+
+function GameGuide({ onClose }) {
+    return (
+        <div className="guide-wrapper">
+            <h1>Guide</h1>
+            <ul>
+                <li>The objective of the game is to capture most tiles on the board.</li>
+                <li>A tile is capture when all four of its edges are selected.</li>
+                <li>Any number of players can play together in a game.</li>
+                <li>Every player in the game gets a turn in round-robin fashion.</li>
+                <li>Each player gets to select any one unselected edge on the board.</li>
+                <li>On selection, if the selected edge is a part of now captured tile, the player earns one point and one extra move.</li>
+                <li>When all tiles are captured, player with the most tiles captured is the winner!</li>
+            </ul>
+            <button onClick={onClose}>Close</button>
         </div>
     )
 }
