@@ -7,8 +7,29 @@ import Dialog from "../Dialog/Dialog";
 function CreateGame() {
     const [createGameFlag, setCreateGameFlag] = useState(false);
     const [showGuideFlag, setShowGuideFlag] = useState(false);
-    const [playersList, setPlayersList] = useState([]);
+
+    return (
+        <div className="create-game">
+            <div className="btn-group">
+                <button onClick={() => setCreateGameFlag(flag => !flag)}>Create Game</button>
+                <button onClick={() => setShowGuideFlag(true)}>Guide</button>
+            </div>
+
+            <Dialog open={createGameFlag}>
+                <CreateGameForm onCancel={() => setCreateGameFlag(false)} />
+            </Dialog>
+
+            <Dialog open={showGuideFlag} >
+                <GameGuide onClose={() => setShowGuideFlag(false)} />
+            </Dialog>
+            
+        </div>
+    )
+}
+
+function CreateGameForm({ onCancel }) {
     const [size, setSize] = useState(3);
+    const [playersList, setPlayersList] = useState([]);
     const [newPlayer, setNewPlayer] = useState('');
     const dispatch = useDispatch();
     const { setBoardSize, setPlayers, setGameStarted } = gameBoardActions;
@@ -47,46 +68,34 @@ function CreateGame() {
     }
 
     return (
-        <div className="create-game">
-            <div className="btn-group">
-                <button onClick={() => setCreateGameFlag(flag => !flag)}>Create Game</button>
-                <button onClick={() => setShowGuideFlag(true)}>Guide</button>
-            </div>
-
-            <div className="game-form-wrapper" style={{ display: createGameFlag ? undefined : 'none' }}>
-                <h1>New Game</h1>
-                <div className="game-form">
-                    <div className="form-controller">
-                        <label htmlFor="size">Board Size</label>
-                        <input type="text" name="size" id="size" value={size} onChange={sizeChangeHandler} />
-                    </div>
-                    <div className="form-controller form-controller__block">
-                        <div className="form-controller__header">
-                            <h2>Players</h2>
-                            <button onClick={playerAddHandler} className={!newPlayer || newPlayer === '' ? 'disabled' : ''}>Add</button>
-                        </div>
-                        <input type="text" name="new-player" id="new-player" placeholder="New Player Alias" value={newPlayer} onChange={ev => setNewPlayer(ev.target.value)} />
-                        <ul className="players-list">
-                            {playersList.map((player, index) => 
-                            <li key={index}>
-                                <span>{player}</span>
-                                <button onClick={() => playerRemoveHandler(index)}>Remove</button>
-                            </li>)}
-                        </ul>
-                    </div>
+        <div className="game-form-wrapper">
+            <h1>New Game</h1>
+            <div className="game-form">
+                <div className="form-controller">
+                    <label htmlFor="size">Board Size</label>
+                    <input type="text" name="size" id="size" value={size} onChange={sizeChangeHandler} />
                 </div>
-                <div className="form-footer">
-                    <button onClick={createGameHandler}>Create Game</button>
-                    <button onClick={() => setCreateGameFlag(false)}>Cancel</button>
+                <div className="form-controller form-controller__block">
+                    <div className="form-controller__header">
+                        <h2>Players</h2>
+                        <button onClick={playerAddHandler} className={!newPlayer || newPlayer === '' ? 'disabled' : ''}>Add</button>
+                    </div>
+                    <input type="text" name="new-player" id="new-player" placeholder="New Player Alias" value={newPlayer} onChange={ev => setNewPlayer(ev.target.value)} />
+                    <ul className="players-list">
+                        {playersList.map((player, index) => 
+                        <li key={index}>
+                            <span>{player}</span>
+                            <button onClick={() => playerRemoveHandler(index)}>Remove</button>
+                        </li>)}
+                    </ul>
                 </div>
             </div>
-
-            <Dialog open={showGuideFlag} >
-                <GameGuide onClose={() => setShowGuideFlag(false)} />
-            </Dialog>
-            
+            <div className="form-footer">
+                <button onClick={createGameHandler}>Create Game</button>
+                <button onClick={onCancel}>Cancel</button>
+            </div>
         </div>
-    )
+    );
 }
 
 function GameGuide({ onClose }) {
