@@ -7,6 +7,7 @@ const defaultState = {
     tilemap: [],
     turn: 0,
     gameOver: false,
+    gameStarted: false,
     players: [],
     moves: []
 };
@@ -62,6 +63,10 @@ const gameBoard = createSlice({
         // gameOver
         setGameOver(state, { payload }) {
             state.gameOver = payload;
+        },
+        // gameStarted
+        setGameStarted(state, { payload }) {
+            state.gameStarted = payload;
         },
         // players
         setPlayers(state, { payload }) {
