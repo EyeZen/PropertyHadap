@@ -53,11 +53,11 @@
             }
 
             & > .player-winner {
-                color: #33ed338e;
+                color: #0bec0bdb;
             }
 
             & > .player-turn {
-                color: rgba(49, 49, 246, 0.843);
+                color: yellow;
             }
         }
     }
