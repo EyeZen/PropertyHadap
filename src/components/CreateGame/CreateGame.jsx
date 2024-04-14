@@ -10,6 +10,7 @@ function CreateGame() {
 
     return (
         <div className="create-game">
+            <h1>Property Hadap</h1>
             <div className="btn-group">
                 <button onClick={() => setCreateGameFlag(flag => !flag)}>Create Game</button>
                 <button onClick={() => setShowGuideFlag(true)}>Guide</button>

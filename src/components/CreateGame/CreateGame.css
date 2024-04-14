@@ -3,6 +3,11 @@
     display: grid;
     place-content: center;
 
+    & > h1 {
+        margin-block: 1em;
+        text-align: center;
+    }
+
     & .btn-group {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
