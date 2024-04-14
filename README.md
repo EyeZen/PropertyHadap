@@ -10,3 +10,4 @@ This is a simple hobby project, a game made with React.
 - On selection, if the selected edge is a part of now captured tile, the player earns one point and one extra move.
 - When all tiles are captured, player with the most tiles captured is the winner!
 
+<img src="./assets/property_hadap.png">
