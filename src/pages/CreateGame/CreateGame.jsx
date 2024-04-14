@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./CreateGame.css";
 import { useDispatch } from "react-redux";
 import { gameBoardActions } from "../../store/slices/gameBoardSlice";
-import Dialog from "../Dialog/Dialog";
+import Dialog from "../../components/Dialog/Dialog";
 
 function CreateGame() {
     const [createGameFlag, setCreateGameFlag] = useState(false);

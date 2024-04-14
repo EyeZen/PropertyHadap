@@ -1,5 +1,5 @@
 import "./App.css";
-import CreateGame from "./components/CreateGame/CreateGame";
+import CreateGame from "./pages/CreateGame/CreateGame";
 import AddPlayerDialog from "./components/Dialog/AddPlayerDialog/AddPlayerDialog";
 import Dialog from "./components/Dialog/Dialog";
 import GameBoard from './components/GameBoard/GameBoard'
